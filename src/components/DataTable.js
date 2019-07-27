@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import MaterialTable from 'material-table';
+import { makeStyles } from '@material-ui/core/styles';
+import { AddBox, ArrowUpward } from "@material-ui/icons";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
 
 export const DataTable = (props) => {
 
@@ -26,41 +31,64 @@ export const DataTable = (props) => {
     ],
   });
 
+  const useStyles = makeStyles({
+    card: {
+      minWidth: 275,
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
+
+  const classes = useStyles();
+
   return (
-    <MaterialTable
-      title="Editable Example"
-      columns={state.columns}
-      data={state.data}
-      editable={{
-        onRowAdd: newData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data.push(newData);
-              setState({ ...state, data });
-            }, 600);
-          }),
-        onRowUpdate: (newData, oldData) =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data[data.indexOf(oldData)] = newData;
-              setState({ ...state, data });
-            }, 600);
-          }),
-        onRowDelete: oldData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data.splice(data.indexOf(oldData), 1);
-              setState({ ...state, data });
-            }, 600);
-          }),
-      }}
-    />
+    <Card className={classes.card}>
+        <CardContent>
+            <MaterialTable
+                title="Editable Example"
+                columns={state.columns}
+                data={state.data}
+                editable={{
+                    onRowAdd: newData =>
+                    new Promise(resolve => {
+                        setTimeout(() => {
+                        resolve();
+                        const data = [...state.data];
+                        data.push(newData);
+                        setState({ ...state, data });
+                        }, 600);
+                    }),
+                    onRowUpdate: (newData, oldData) =>
+                    new Promise(resolve => {
+                        setTimeout(() => {
+                        resolve();
+                        const data = [...state.data];
+                        data[data.indexOf(oldData)] = newData;
+                        setState({ ...state, data });
+                        }, 600);
+                    }),
+                    onRowDelete: oldData =>
+                    new Promise(resolve => {
+                        setTimeout(() => {
+                        resolve();
+                        const data = [...state.data];
+                        data.splice(data.indexOf(oldData), 1);
+                        setState({ ...state, data });
+                        }, 600);
+                    }),
+                }}
+            />
+        </CardContent>
+    </Card>
   );
 }
 
