@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 const Graph = (props) => {
 
@@ -15,15 +17,26 @@ const Graph = (props) => {
 
     const [ layout, setLayout ] = useState({
         title: 'A Fancy Plot',
+        margin: { l: 50, r: 40, t: 50, b: 40 },
     })
 
-
+    const [ config, setConfig ] = useState({
+        style: {
+            width: '100%',
+            height: '100%',
+        }
+    })
 
     return (
-        <Plot
-          data={data}
-          layout={layout}
-        />
+        <Card style={{margin: '5px'}}>
+            <CardContent>
+                <Plot
+                data={data}
+                layout={layout}
+                style={config.style}
+                />
+            </CardContent>
+        </Card>
       );
 }
 
