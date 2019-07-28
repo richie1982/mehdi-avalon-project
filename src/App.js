@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import Header from './components/Header'
 import Graph from './components/Graph';
 import DataTable from './components/DataTable'
 import SpreadSheet from './components/SpreadSheet'
-// import './App.css';
+import { fetchData } from './services/api'
+import * as actions from './actions'
 
-const App = () => {
+export const App = (props) => {
+
+  const dailyData = 'FX_DAILY'
 
   const layout = {
     table: {
@@ -17,6 +21,15 @@ const App = () => {
       justifyContent: 'center',
     }
   }
+
+  const handleDataFetch = () => {
+    fetchData(dailyData, 'EUR', 'USD')
+      .then(data => props.getData(data))
+  }
+
+  useEffect(() => {
+    handleDataFetch()
+  }, []) 
 
   return (
     <div >
@@ -32,4 +45,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default connect(null, actions)(App);

@@ -8,15 +8,19 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Calendar from './Calendar';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    background: 'white',
     display: 'flex',
     flexWrap: 'wrap',
 },
 formControl: {
-    margin: theme.spacing(1),
+    margin: '2px',
+    padding: 'none',
     minWidth: 120,
+    justifyContent: 'center'
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -48,6 +52,7 @@ const Header = (props) => {
     const style = {
         config: {
             display: 'flex',
+            justifyContent: 'space-around',
             backgroundColor: 'black',
             width: 'auto',
             height: '100px',
@@ -55,7 +60,9 @@ const Header = (props) => {
         },
         text: {
             color: 'white',
-            marginTop: '0px'
+            textAlign: 'center',
+            marginTop: '0px',
+            padding: '5px'
         }
     }
 
@@ -64,7 +71,7 @@ const Header = (props) => {
             <h1 style={style.text}>FX rates</h1>
             <form className={classes.root} autoComplete="off">
                 <FormControl variant="outlined" className={classes.formControl}>
-                    <InputLabel ref={inputLabel} htmlFor="outlined-age-simple" style={{color: 'white'}}>
+                    <InputLabel ref={inputLabel} htmlFor="outlined-age-simple" style={{color: 'black', position: 'relative',}}>
                         Currency
                     </InputLabel>
                     <Select
@@ -82,6 +89,9 @@ const Header = (props) => {
                     </Select>
                 </FormControl>
             </form>
+            <div>
+              <Calendar/>
+            </div>
         </div>
     )
 }

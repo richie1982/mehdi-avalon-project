@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-const dataReducer = (state = [], action) => {
+const dataReducer = (state = null, action) => {
     switch(action.type) {
-        case "GET DATA":
-            return [...state, ...action.payolad] 
+        case "GET_DATA":
+            return state = action.payload 
         default:
             return state
     }
